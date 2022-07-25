@@ -49,7 +49,7 @@ const DividerLine = styled.div`
 `;
 
 const CostWrapper = styled.div`
-  margin-top: 88px;
+  margin-top: 18px;
   display: flex;
   align-items: flex-end;
 `;
@@ -86,7 +86,7 @@ const CostFree = styled.div`
 `;
 
 const TextsWrapper = styled.div`
-  margin-top: 0px;
+  margin-top: 22px;
 `;
 
 const TextWrapper = styled.div`
@@ -115,6 +115,42 @@ const Image = styled.img`
   height: 56px;
 `;
 
+const LanguagesWrapper = styled.div`
+  display: flex;
+  margin-top: 15px;
+`;
+
+function getColorByLang(lang) {
+  if (lang === "파이썬") return "#477DB1";
+  if (lang === "HTML/CSS") return "#DE561D";
+  if (lang === "자바스크립트") return "#F3CB39";
+}
+
+const Language = styled.p`
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 13px;
+  color: ${(props) => getColorByLang(props.lang)};
+  position: relative;
+  padding: 6px, 8px;
+
+  + p {
+    margin-left: 8px;
+  }
+
+  ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: ${(props) => getColorByLang(props.lang)};
+    opacity: 0.2;
+    border-radius: 2px;
+  }
+`;
+
 CourseCard.defaultProps = {
   tags: ["태그1", "태그2"],
   title: "샘플 타이틀",
@@ -127,6 +163,7 @@ CourseCard.defaultProps = {
   classFormat: "온라인",
   duration: "무제한",
   imgUrl: "logo192.png",
+  languages: ["파이썬", "HTML/CSS", "자바스크립트"],
 };
 
 export default function CourseCard({
@@ -141,6 +178,7 @@ export default function CourseCard({
   classFormat,
   duration,
   imgUrl,
+  languages,
 }) {
   return (
     <Container>
@@ -162,6 +200,15 @@ export default function CourseCard({
         </TextWrapper>
       </TextsWrapper>
       <Image src={imgUrl} />
+      <LanguagesWrapper>
+        {languages.map((lang, idx) => {
+          return (
+            <Language key={`${lang}-${idx}-${title}`} lang={lang}>
+              {lang}
+            </Language>
+          );
+        })}
+      </LanguagesWrapper>
       <DividerLine />
       {isFree ? (
         <CostFree>무료</CostFree>
