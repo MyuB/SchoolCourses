@@ -11,7 +11,7 @@ const Container = styled.div`
 export default function App() {
   return (
     <Container>
-      <CourseCard />
+      <CourseCard isFree={false} />
     </Container>
   );
 }
