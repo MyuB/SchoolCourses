@@ -48,41 +48,10 @@ const DividerLine = styled.div`
   bottom: 64px;
 `;
 
-const CostWrapper = styled.div`
-  margin-top: 18px;
+const CreditWrapper = styled.div`
+  margin-top: 50px;
   display: flex;
   align-items: flex-end;
-`;
-
-const CurrentCost = styled.p`
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 23px;
-  color: #151618;
-`;
-
-const OriginalCost = styled.p`
-  font-size: 14px;
-  line-height: 20px;
-  text-decoration-line: line-through;
-  color: #a8a9ab;
-  margin-left: 8px;
-`;
-
-const DiscountPercentile = styled.p`
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 23px;
-  color: #f94669;
-  margin-left: auto;
-`;
-
-const CostFree = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 23px;
-  color: #34ab53;
-  margin-top: 88px;
 `;
 
 const TextsWrapper = styled.div`
@@ -170,21 +139,19 @@ const Grade = styled.div`
 
 const GradeinNum = styled.div`
   font-size: 16px;
-  line-height: 20px;
+  font-weight: bold;
+  line-height: 23px;
   color: black;
-  margin-left: 18px;
+  margin-left: auto;
+  margin-right: 15px;
 `;
 
 CourseCard.defaultProps = {
-  tags: ["전공선택", "태그2"],
+  tags: ["#전공선택", "#5대전공"],
   title: "오퍼레이팅시스템",
   description: "OS가 어떻게 작동하는지 배웁니다",
-  isFree: false,
-  currentCost: 42000,
   grade: "A",
-  originalCost: 57000,
-  discountPercentile: 35,
-  level: "중급",
+  level: "고급",
   classFormat: "온라인",
   duration: "2022-1",
   imgUrl: "logo192.png",
@@ -195,10 +162,7 @@ export default function CourseCard({
   tags,
   title,
   description,
-  isFree,
-
   grade,
-
   level,
   classFormat,
   duration,
@@ -235,14 +199,11 @@ export default function CourseCard({
         })}
       </LanguagesWrapper>
       <DividerLine />
-      {isFree ? (
-        <CostFree>무료</CostFree>
-      ) : (
-        <CostWrapper>
-          <Grade>학점: {grade}</Grade>
-          <GradeinNum>{gradeCalc(grade)}</GradeinNum>
-        </CostWrapper>
-      )}
+
+      <CreditWrapper>
+        <Grade>학점: {grade}</Grade>
+        <GradeinNum>평점: {gradeCalc(grade)}</GradeinNum>
+      </CreditWrapper>
     </Container>
   );
 }
