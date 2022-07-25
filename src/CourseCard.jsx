@@ -124,6 +124,7 @@ function getColorByLang(lang) {
   if (lang === "파이썬") return "#477DB1";
   if (lang === "HTML/CSS") return "#DE561D";
   if (lang === "자바스크립트") return "#F3CB39";
+  if (lang === "C") return "#477DB1";
 }
 
 const Language = styled.p`
@@ -151,19 +152,43 @@ const Language = styled.p`
   }
 `;
 
+function gradeCalc(grade) {
+  if (grade === "A+") return 4.5;
+  else if (grade === "A") return 4.0;
+  else if (grade === "B+") return 3.5;
+  else if (grade === "B") return 3.0;
+  else if (grade === "C") return 2.0;
+  else if (grade === "P") return NaN;
+}
+
+const Grade = styled.div`
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 23px;
+  color: #151618;
+`;
+
+const GradeinNum = styled.div`
+  font-size: 16px;
+  line-height: 20px;
+  color: black;
+  margin-left: 18px;
+`;
+
 CourseCard.defaultProps = {
-  tags: ["태그1", "태그2"],
-  title: "샘플 타이틀",
-  description: "프로그래밍이 처음이신가요? 파이썬으로 쉽고 재밌게 시작해봐요.",
+  tags: ["전공선택", "태그2"],
+  title: "오퍼레이팅시스템",
+  description: "OS가 어떻게 작동하는지 배웁니다",
   isFree: false,
   currentCost: 42000,
+  grade: "A",
   originalCost: 57000,
   discountPercentile: 35,
   level: "중급",
   classFormat: "온라인",
-  duration: "무제한",
+  duration: "2022-1",
   imgUrl: "logo192.png",
-  languages: ["파이썬", "HTML/CSS", "자바스크립트"],
+  languages: ["C"],
 };
 
 export default function CourseCard({
@@ -171,9 +196,9 @@ export default function CourseCard({
   title,
   description,
   isFree,
-  currentCost,
-  originalCost,
-  discountPercentile,
+
+  grade,
+
   level,
   classFormat,
   duration,
@@ -214,9 +239,8 @@ export default function CourseCard({
         <CostFree>무료</CostFree>
       ) : (
         <CostWrapper>
-          <CurrentCost>{currentCost.toLocaleString()}원</CurrentCost>
-          <OriginalCost>{originalCost.toLocaleString()}원</OriginalCost>
-          <DiscountPercentile>{discountPercentile}%</DiscountPercentile>
+          <Grade>학점: {grade}</Grade>
+          <GradeinNum>{gradeCalc(grade)}</GradeinNum>
         </CostWrapper>
       )}
     </Container>
